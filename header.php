@@ -10,50 +10,57 @@
  */
 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<noscript><link rel="stylesheet" href="<?php wp_enqueue_style('noscript', get_template_directory_uri() . '/assets/css/noscript.css'); ?>"></noscript>
+	<head>
+		<meta charset="<?php bloginfo( 'charset' ); ?>">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="profile" href="https://gmpg.org/xfn/11">
+		<noscript><link rel="stylesheet" href="<?php wp_enqueue_style('noscript', get_template_directory_uri() . '/assets/css/noscript.css'); ?>"></noscript>
 
-	<?php wp_head(); ?>
-</head>
+		<?php wp_head(); ?>
+	</head>
 
-<body <?php body_class(); ?>>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'forty-wp' ); ?></a>
+	<body <?php body_class('is-preload'); ?>>
+		<!-- Wrapper -->
+		<div id="wrapper">
+			<!-- Header -->
+			<header id="header" class="alt">
+				<a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
+					<strong>
+						<?php bloginfo('name'); ?>
+					</strong> 
+					<?php 
+					$forty_wp_description = get_bloginfo( 'description', 'display' );
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					if ( $forty_wp_description || is_customize_preview() ) :
+						?>
+						<span><?php echo $forty_wp_description; /* WPCS: xss ok. */ ?></span>
+					<?php endif; ?>
+				</a>
+
+				<nav>
+					<a href="#menu"><?php esc_html_e('Menu', 'forty-wp'); ?></a>
+				</nav>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
 				<?php
-			else :
+				wp_nav_menu(array(
+					'menu'           => 'primary',
+					'theme_location' => 'main-menu',
+					'menu_class'     => 'links',
+					'container'      => false,
+					'fallback_cb'    => false
+				));
 				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$forty_wp_description = get_bloginfo( 'description', 'display' );
-			if ( $forty_wp_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $forty_wp_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'forty-wp' ); ?></button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+				<ul class="actions stacked">
+					<li><a href="<?php echo esc_url('/wp-login.php?action=register'); ?>" class="button primary fit">Register</a></li>
+					<li><a href="<?php echo esc_url('/wp-login.php'); ?>" class="button fit">Log In</a></li>
+				</ul>
+			</nav>
 
-	<div id="content" class="site-content">
+			<!-- Main -->
+			<div id="main">
