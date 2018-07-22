@@ -27,6 +27,17 @@ function forty_wp_body_classes( $classes ) {
 add_filter( 'body_class', 'forty_wp_body_classes' );
 
 /**
+ * Add custom css classes to social menu links
+ */
+function social_links_classes($atts, $items, $args) {
+	if ($args->theme_location == 'social-menu') {
+		$atts['class'] = "icon fa-{$items->title}";
+	}
+	return $atts;
+}
+add_filter('nav_menu_link_attributes', 'social_links_classes', 10, 3);
+
+/**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
 function forty_wp_pingback_header() {

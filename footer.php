@@ -11,27 +11,37 @@
 
 ?>
 
-			</div><!-- #content -->
-
-			<footer id="colophon" class="site-footer">
-				<div class="site-info">
-					<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'forty-wp' ) ); ?>">
-						<?php
-						/* translators: %s: CMS name, i.e. WordPress. */
-						printf( esc_html__( 'Proudly powered by %s', 'forty-wp' ), 'WordPress' );
-						?>
-					</a>
-					<span class="sep"> | </span>
-						<?php
-						/* translators: 1: Theme name, 2: Theme author. */
-						printf( esc_html__( 'Theme: %1$s by %2$s.', 'forty-wp' ), 'forty-wp', '<a href="https://bailylex.github.io/portfolio/">Alexander Fedorov</a>' );
-						?>
-				</div><!-- .site-info -->
-			</footer><!-- #colophon -->
-		</div><!-- #page -->
-
 			</div><!-- #main -->
-		</div><!-- #wrapper -->
+
+			<!-- Contact plugin -->
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<!-- Social menu -->
+					<?php
+					wp_nav_menu(array(
+						'theme_location' => 'social-menu',
+						'menu_class'     => 'icons',
+						'container'      => false,
+						'link_before'    => '<span class="label">',
+						'link_after'     => '</span>',
+						'fallback_cb'    => false
+					));
+					?><!-- #social menu -->
+
+					<ul class="copyright">
+						<li>&copy; <?php bloginfo('name'); ?></li>
+						<li>
+							<?php 
+							/* translators: 1: Text, 2: Theme author. */
+							printf( esc_html__( 'Theme: %1$s by %2$s.', 'forty-wp' ), 'forty-wp', '<a href="https://bailylex.github.io/portfolio/">Alexander Fedorov</a>' );
+							?>
+						</li>
+					</ul>
+				</div>
+			</footer>
+		</div><!-- #wrapper -->	
 		<?php wp_footer(); ?>
 	</body>
 </html>
